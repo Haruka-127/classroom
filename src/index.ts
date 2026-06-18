@@ -25,7 +25,7 @@ let userInteracted = false;
 
 const HIDDEN_BACKGROUND_BUTTON: boolean = false;
 const RGB_COLOR_GREEN = 'rgb(0, 197, 65)';
-const TYPE_MOVIE_ROUNDED_PLUS = 'movie-rounded-plus';
+const TYPE_SUPPLEMENT_SUFFIX = '-plus';
 const REDIRECT_TIME = 3000;
 const COOL_TIME = 5000;
 const BUTTON_STYLE = `
@@ -445,10 +445,10 @@ function getList(): ListItem[] {
         element.textContent?.includes('視聴済み') ||
         element.textContent?.includes('理解した')) ??
       false;
-    const type =
-      iconElement?.getAttribute('type') === TYPE_MOVIE_ROUNDED_PLUS
-        ? 'supplement'
-        : 'main';
+    const iconType = iconElement?.getAttribute('type') ?? '';
+    const type = iconType.endsWith(TYPE_SUPPLEMENT_SUFFIX)
+      ? 'supplement'
+      : 'main';
     return { title, passed, type };
   });
 }
