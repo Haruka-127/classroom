@@ -24,7 +24,7 @@ let hideUI = false;
 let userInteracted = false;
 
 const HIDDEN_BACKGROUND_BUTTON: boolean = false;
-const RGB_COLOR_GREEN = 'rgb(0, 197, 65)';
+const RGB_COLOR_GREEN = 'rgb(11, 183, 118)';
 const TYPE_SUPPLEMENT_SUFFIX = '-plus';
 const REDIRECT_TIME = 3000;
 const COOL_TIME = 5000;
