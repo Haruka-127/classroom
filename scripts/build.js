@@ -66,46 +66,28 @@ const config = {
     }
 
     // Create a zip file
-    const output = fs.createWriteStream("./dist/firefox.zip");
-    const archive = archiver("zip", {
-      zlib: { level: 9 }, // Sets the compression level.
-    });
-
-    output.on("close", () => {});
-
-    archive.on("warning", (err) => {
-      if (err.code === "ENOENT") {
-        // log warning
-      } else {
-        // throw error
-        throw err;
-      }
-    });
-
-    archive.on("error", (err) => {
-      throw err;
-    });
-
-    archive.pipe(output);
-
-    // append files from a directory
-    const firefoxFiles = fs.readdirSync("./dist/firefox");
-    for (const file of firefoxFiles) {
-      archive.file(`./dist/firefox/${file}`, { name: file });
-    }
-
-    // finalize the archive (ie we are done appending files but streams have to finish yet)
-    archive
-      .finalize()
-      .then(() => {
-        fs.rm("./dist/firefox", { recursive: true }, (err) => {
-          if (err) throw err;
-        });
-      })
-      .catch((err) => {
-        throw err;
+    await new Promise((resolve, reject) => {
+      const output = fs.createWriteStream("./dist/firefox.zip");
+      const archive = archiver("zip", {
+        zlib: { level: 9 }, // Sets the compression level.
       });
+
+      output.on("close", resolve);
+      output.on("error", reject);
+
+      archive.on("warning", (err) => {
+        if (err.code !== "ENOENT") reject(err);
+      });
+      archive.on("error", reject);
+
+      archive.pipe(output);
+      archive.directory("./dist/firefox", false);
+      archive.finalize().catch(reject);
+    });
+
+    fs.rmSync("./dist/firefox", { recursive: true });
   } catch (err) {
     console.error(err);
+    process.exitCode = 1;
   }
 })();
