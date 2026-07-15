@@ -70,3 +70,7 @@ pnpm build
 5. `about:addons`に移動して拡張機能の管理を開く
 6. `https://www.nnn.ed.nico`へのアクセスを有効にする
 7. [https://www.nnn.ed.nico/](https://www.nnn.ed.nico/)にアクセスする！
+
+## 謝辞
+
+この拡張機能を最初に作成してくださった[minagishl](https://github.com/minagishl)さんに、心より感謝いたします。

@@ -75,3 +75,7 @@ The following process is different for each browser, so please refer to the sect
 5. go to `about:addons` and open the extension management.
 6. enable `https://www.nnn.ed.nico access to stored data`.
 7. go to [https://www.nnn.ed.nico/](https://www.nnn.ed.nico/) and enjoy!
+
+## Acknowledgements
+
+Special thanks to [minagishl](https://github.com/minagishl), who originally created this extension.
